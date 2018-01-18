@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NoteBookAndroid</string>
+    <string name="w">world</string>
+    <string name="h">hello</string>
+</resources>
