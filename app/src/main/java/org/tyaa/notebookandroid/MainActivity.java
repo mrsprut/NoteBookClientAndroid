@@ -37,7 +37,8 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
         setListAdapter(mAdapter);
 
         new JsonFetchr(this)
-                .fetch("http://10.0.3.2:8080/NoteBookServer-war/Api?action=get_orders");
+                .fetch("http://10.20.60.10:8080/NoteBookServer-war/Api?action=get_orders");
+                //.fetch("http://10.0.3.2:8080/NoteBookServer-war/Api?action=get_orders");
     }
 
     private List<Order> generateOrders(){

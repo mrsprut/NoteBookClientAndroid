@@ -2,6 +2,7 @@ package org.tyaa.notebookandroid.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.tyaa.notebookandroid.MainActivity;
+import org.tyaa.notebookandroid.OrderDetailsActivity;
 import org.tyaa.notebookandroid.R;
 import org.tyaa.notebookandroid.model.Order;
 
@@ -41,7 +44,7 @@ public class NotesListAdapter extends ArrayAdapter<Order> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         View view;// = convertView;
         //if(view == null) {
@@ -49,16 +52,29 @@ public class NotesListAdapter extends ArrayAdapter<Order> {
             view = inflater.inflate(mResource, parent, false);
         //}
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Toast.makeText(mContext, mOrders.get(position).getCustomer(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(mContext, OrderDetailsActivity.class);
+                intent.putExtra("details",mOrders.get(position).getText());
+                ((MainActivity) mContext).startActivityForResult(intent,0);
+            }
+        });
+
         TextView customerTextView = view.findViewById(R.id.customerTextView);
         TextView descriptionTextView = view.findViewById(R.id.descriptionTextView);
 
-        customerTextView.setText(mOrders.get(position).getCustomer());
+        customerTextView.setText("Customer: " + mOrders.get(position).getCustomer());
         descriptionTextView.setText(
-                mOrders.get(position).getText().length() > 25
+                "Task: " +
+                (mOrders.get(position).getText().length() > 25
                 ? mOrders.get(position).getText().substring(0, 25) + " ..."
-                : mOrders.get(position).getText()
+                : mOrders.get(position).getText())
         );
 
         return view;
     }
+
+
 }
