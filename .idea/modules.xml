@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NoteBookAndroid.iml" filepath="$PROJECT_DIR$/NoteBookAndroid.iml" />
+      <module fileurl="file://C:\Users\student\AndroidStudioProjects\NoteBookClientAndroid\NoteBookAndroid.iml" filepath="C:\Users\student\AndroidStudioProjects\NoteBookClientAndroid\NoteBookAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NoteBookClientAndroid.iml" filepath="$PROJECT_DIR$/NoteBookClientAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\student\AndroidStudioProjects\NoteBookClientAndroid\app\app.iml" filepath="C:\Users\student\AndroidStudioProjects\NoteBookClientAndroid\app\app.iml" />
     </modules>
   </component>
 </project>
