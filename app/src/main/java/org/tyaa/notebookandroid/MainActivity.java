@@ -22,7 +22,13 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
     //private ListView mNotesListView;
     private List<Order> mOrders;
     private NotesListAdapter mAdapter;
-    private static Context mContext;
+    private Context mContext;
+
+    public static final String DETAILS_EXTRA =
+            "org.tyaa.notebookandroid.MainActivity.DETAILS_EXTRA";
+
+    public static final int DETAILS_REQUEST = 0;
+    public static final int ADD_ORDER_REQUEST = 1;
 
     private FloatingActionButton mFloatingActionButton;
 
@@ -34,12 +40,14 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
 
         mContext = this;
 
+        mFloatingActionButton = findViewById(R.id.fab);
+
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(mContext, AddOrderActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, MainActivity.ADD_ORDER_REQUEST);
             }
         });
 
@@ -54,6 +62,7 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
         //mNotesListView.setAdapter(adapter);
         setListAdapter(mAdapter);
 
+        refreshOrdersList();
         //new JsonFetchr(this)
                 //.fetch("http://10.20.60.10:8080/NoteBookServer-war/Api?action=get_orders");
                 //.fetch("http://10.0.3.2:8080/NoteBookServer-war/Api?action=get_orders");
@@ -76,6 +85,9 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
     @Override
     public void onOrdersFetched(List _orders) {
 
+        if(mOrders.size() > 0){
+            mOrders.clear();
+        }
         mOrders.addAll(_orders);
         mAdapter.notifyDataSetChanged();
     }
@@ -86,13 +98,16 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
 
         switch (requestCode){
 
-            case 1 : {
+            case MainActivity.ADD_ORDER_REQUEST : {
 
+                if (resultCode == RESULT_OK){
+                    refreshOrdersList();
+                }
             }
         }
     }
 
-    public static void refreshOrdersList(){
+    private void refreshOrdersList(){
 
         new JsonFetchr((IFetchedDataHandler) mContext)
                 .fetch("https://notebookgae.appspot.com/hello?action=get_orders");

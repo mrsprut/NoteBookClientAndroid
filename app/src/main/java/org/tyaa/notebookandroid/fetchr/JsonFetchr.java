@@ -52,6 +52,9 @@ public class JsonFetchr implements IFetchr {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                //Когда получение коллекции данных завершено,
+                                //вызываем метод заполнения визуального списка
+                                //у активности, запустившей этот код
                                 mFetchedDataHandler.onOrdersFetched(orders);
                             }
                         }

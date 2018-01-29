@@ -11,7 +11,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        String detailsString = getIntent().getStringExtra("details");
+        String detailsString =
+                getIntent().getStringExtra(MainActivity.DETAILS_EXTRA);
 
         TextView detailsTextView = findViewById(R.id.detailsTextView);
         detailsTextView.setText(detailsString);
