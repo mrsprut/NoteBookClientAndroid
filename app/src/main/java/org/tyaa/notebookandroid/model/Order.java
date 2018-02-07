@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class Order implements Serializable {
 
-    private Integer id;
+    private Long id;
     private String customer;
     private String text;
     private Date date;
@@ -24,22 +24,22 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Integer id) {
+    public Order(Long id) {
         this.id = id;
     }
 
-    public Order(Integer id, String customer, String text, Date date) {
+    public Order(Long id, String customer, String text, Date date) {
         this.id = id;
         this.customer = customer;
         this.text = text;
         this.date = date;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

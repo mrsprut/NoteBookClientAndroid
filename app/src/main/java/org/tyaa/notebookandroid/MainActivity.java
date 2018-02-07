@@ -20,15 +20,20 @@ import java.util.List;
 public class MainActivity extends ListActivity implements IFetchedDataHandler {
 
     //private ListView mNotesListView;
-    private List<Order> mOrders;
+    public static List<Order> mOrders;
     private NotesListAdapter mAdapter;
     private Context mContext;
 
     public static final String DETAILS_EXTRA =
             "org.tyaa.notebookandroid.MainActivity.DETAILS_EXTRA";
+    public static final String ADD_EDIT_EXTRA =
+            "org.tyaa.notebookandroid.MainActivity.ADD_EDIT_EXTRA";
+    public static final String ORDER_ID_EXTRA =
+            "org.tyaa.notebookandroid.MainActivity.ORDER_ID_EXTRA";
 
     public static final int DETAILS_REQUEST = 0;
     public static final int ADD_ORDER_REQUEST = 1;
+    public static final int EDIT_ORDER_REQUEST = 2;
 
     private FloatingActionButton mFloatingActionButton;
 
@@ -47,6 +52,10 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
             public void onClick(View view) {
 
                 Intent intent = new Intent(mContext, AddOrderActivity.class);
+                intent.putExtra(
+                        MainActivity.ADD_EDIT_EXTRA
+                        , MainActivity.ADD_ORDER_REQUEST
+                );
                 startActivityForResult(intent, MainActivity.ADD_ORDER_REQUEST);
             }
         });
@@ -68,7 +77,7 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
                 //.fetch("http://10.0.3.2:8080/NoteBookServer-war/Api?action=get_orders");
     }
 
-    private List<Order> generateOrders(){
+    /*private List<Order> generateOrders(){
 
         List<Order> orders = new ArrayList<>();
         for (int i = 0; i < 10; i++){
@@ -80,7 +89,7 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
             orders.add(order);
         }
         return orders;
-    }
+    }*/
 
     @Override
     public void onOrdersFetched(List _orders) {
@@ -98,6 +107,8 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
 
         switch (requestCode){
 
+            case MainActivity.EDIT_ORDER_REQUEST : {
+            }
             case MainActivity.ADD_ORDER_REQUEST : {
 
                 if (resultCode == RESULT_OK){
@@ -107,7 +118,7 @@ public class MainActivity extends ListActivity implements IFetchedDataHandler {
         }
     }
 
-    private void refreshOrdersList(){
+    public void refreshOrdersList(){
 
         new JsonFetchr((IFetchedDataHandler) mContext)
                 .fetch("https://notebookgae.appspot.com/hello?action=get_orders");

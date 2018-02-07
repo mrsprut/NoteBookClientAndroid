@@ -23,7 +23,7 @@ public class JsonParser {
                     _jsonArray.getJSONObject(i);
 
             Order order = new Order();
-            order.setId(orderJSONObject.getInt("id"));
+            order.setId(orderJSONObject.getLong("id"));
             order.setText(orderJSONObject.getString("text"));
             order.setCustomer(orderJSONObject.getString("customer"));
             orders.add(order);
